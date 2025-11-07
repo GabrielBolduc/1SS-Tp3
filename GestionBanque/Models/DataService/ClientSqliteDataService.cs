@@ -89,7 +89,6 @@ namespace GestionBanque.Models.DataService
         {
             throw new NotImplementedException();
         }
-
         public void RecupererComptes(Client c)
         {
             using SqliteConnection connexion = OuvrirConnexion();
