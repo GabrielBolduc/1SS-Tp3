@@ -1,17 +1,15 @@
-﻿using GestionBanque.Models.DataService;
-using GestionBanque.ViewModels;
+﻿using GestionBanque.ViewModels; // Assurez-vous d'avoir ce 'using'
 using System.Windows;
-
 
 namespace GestionBanque.Views
 {
     public partial class MainView : Window
     {
-        public MainView()
+        public MainView(MainViewModel viewModel)
         {
             InitializeComponent();
-            InteractionUtilisateurGui iug = new InteractionUtilisateurGui();
-            DataContext = new MainViewModel(iug, new BanqueViewModel(iug, new ClientSqliteDataService("banque.bd"), new CompteSqliteDataService("banque.bd")));
+            // assigne DataContext au ViewModel inject par Autofac
+            DataContext = viewModel;
         }
     }
 }
