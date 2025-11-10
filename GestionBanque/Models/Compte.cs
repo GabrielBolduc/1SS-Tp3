@@ -8,7 +8,7 @@ namespace GestionBanque.Models
     {
         private double _balance;
 
-        public Compte(long id, string noCompte, double balanceDepart, long clientId) 
+        public Compte(long id, string noCompte, double balanceDepart, long clientId)
         {
             Id = id;
             NoCompte = noCompte;
@@ -33,16 +33,16 @@ namespace GestionBanque.Models
                 throw new ArgumentOutOfRangeException($"Montant non valide pour le dépôt : {montant}");
             }
 
-            Balance -= montant;
+            Balance += montant;
         }
 
         public long Id { get; set; }
         public string NoCompte { get; set; }
-        public double Balance 
+        public double Balance
         {
             get { return _balance; }
             set
-            { 
+            {
                 _balance = value;
                 OnPropertyChanged();
             }

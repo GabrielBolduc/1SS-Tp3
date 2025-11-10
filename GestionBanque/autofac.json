@@ -1,7 +1,6 @@
 {
   "defaultAssembly": "GestionBanque",
   "components": [
-    // 1. Enregistrement des ViewModels (ils seront auto-injectés)
     {
       "type": "GestionBanque.ViewModels.MainViewModel"
     },
@@ -9,12 +8,10 @@
       "type": "GestionBanque.ViewModels.BanqueViewModel"
     },
 
-    // 2. Enregistrement de la vue principale
     {
       "type": "GestionBanque.Views.MainView"
     },
 
-    // 3. Enregistrement des services
     {
       "type": "GestionBanque.Views.InteractionUtilisateurGui",
       "services": [
@@ -24,9 +21,6 @@
       ]
     },
 
-    // 4. Enregistrement des DataServices avec paramètres de constructeur
-    // Note: C'est ici qu'on gère les paramètres requis par les constructeurs
-    // de ClientSqliteDataService et CompteSqliteDataService.
     {
       "type": "GestionBanque.Models.DataService.ClientSqliteDataService",
       "services": [
