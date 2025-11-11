@@ -23,8 +23,8 @@ namespace GestionBanque.Models.DataService
             {
                 Client c = new Client(
                     lecteur.GetInt32(lecteur.GetOrdinal("id")),
-                    lecteur.GetString(lecteur.GetOrdinal("prenom")),
                     lecteur.GetString(lecteur.GetOrdinal("nom")),
+                    lecteur.GetString(lecteur.GetOrdinal("prenom")),
                     lecteur.GetString(lecteur.GetOrdinal("courriel"))
                     );
 
@@ -91,6 +91,7 @@ namespace GestionBanque.Models.DataService
         }
         public void RecupererComptes(Client c)
         {
+            c.Comptes.Clear();
             using SqliteConnection connexion = OuvrirConnexion();
 
             using SqliteCommand commande = new SqliteCommand("SELECT * FROM compte WHERE client_id=@client_id", connexion);
