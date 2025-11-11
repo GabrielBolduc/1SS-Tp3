@@ -50,7 +50,7 @@ namespace GestionBanque.Models.DataService
             using SqliteConnection connexion = OuvrirConnexion();
 
             using SqliteCommand commande = new SqliteCommand("UPDATE compte SET balance = @balance WHERE id = @id", connexion);
-            commande.Parameters.AddWithValue("@balance", record.Id);
+            commande.Parameters.AddWithValue("@balance", record.Balance);
             commande.Parameters.AddWithValue("@id", record.Id);
             commande.Prepare();
 

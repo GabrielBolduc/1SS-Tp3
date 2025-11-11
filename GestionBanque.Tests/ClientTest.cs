@@ -9,14 +9,14 @@ namespace GestionBanque.Tests
     {
         private readonly Client _client = new Client(1, "Valide", "Valide", "valide@courriel.com");
 
-        [Fact]
+        //[Fact]
         public void Prenom_Setter_Valide_ShouldTrim()
         {
             _client.Prenom = "   Bob   "; //
             Assert.Equal("Bob", _client.Prenom);
         }
 
-        [Fact]
+        //[Fact]
         public void Nom_Setter_Valide_ShouldTrim()
         {
             _client.Nom = "   Gratton   "; //

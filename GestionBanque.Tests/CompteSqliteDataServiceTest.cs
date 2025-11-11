@@ -15,7 +15,7 @@ namespace GestionBanque.Tests
     {
         private const string CheminBd = "..\\test.bd";
 
-        //[Fact]
+        [Fact]
         [AvantApresDataService(CheminBd)]
         public void Get_ShouldBeValid()
         {
@@ -28,6 +28,22 @@ namespace GestionBanque.Tests
 
             // Affirmation
             Assert.Equal(compteAttendu, compteActuel);
+        }
+
+        [Fact]
+        [AvantApresDataService(CheminBd)] 
+        public void Update_ShouldBeValid()
+        {
+            CompteSqliteDataService ds = new CompteSqliteDataService(CheminBd);
+            Compte? compteAModifier = ds.Get(1);
+            double nouvelleBalance = 500.0;
+            compteAModifier.Balance = nouvelleBalance; 
+
+            bool updateReussi = ds.Update(compteAModifier); //
+
+            Assert.True(updateReussi);
+            Compte? compteModifie = ds.Get(1);
+            Assert.Equal(nouvelleBalance, compteModifie.Balance);
         }
     }
 }

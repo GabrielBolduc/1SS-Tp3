@@ -16,7 +16,7 @@ namespace GestionBanque.Tests
     {
         private const string CheminBd = "..\\test.bd";
 
-        //[Fact]
+        [Fact]
         [AvantApresDataService(CheminBd)]
         public void Get_ShouldBeValid()
         {
@@ -31,6 +31,57 @@ namespace GestionBanque.Tests
 
             // Affirmation
             Assert.Equal(clientAttendu, clientActuel);
+        }
+
+        [Fact]
+        [AvantApresDataService(CheminBd)]
+        public void GetAll_ShouldBeValid()
+        {
+            ClientSqliteDataService ds = new ClientSqliteDataService(CheminBd);
+            List<Client> clientsAttendus = new List<Client>
+            {
+                new Client(1, "Amar", "Quentin", "quentin@gmail.com"),
+                new Client(2, "Agère", "Tex", "tex@gmail.com"),
+                new Client(3, "Vigote", "Sarah", "sarah@gmail.com")
+            };
+            clientsAttendus[0].Comptes.Add(new Compte(1, "9864", 831.76, 1));
+            clientsAttendus[0].Comptes.Add(new Compte(2, "2370", 493.04, 1));
+            clientsAttendus[1].Comptes.Add(new Compte(3, "7640", 634.73, 2));
+            clientsAttendus[2].Comptes.Add(new Compte(4, "7698", 906.72, 3));
+
+            List<Client> clientsActuels = ds.GetAll().ToList(); //
+
+            Assert.Equal(clientsAttendus.Count, clientsActuels.Count);
+            Assert.Equal(clientsAttendus, clientsActuels);
+        }
+
+        [Fact]
+        [AvantApresDataService(CheminBd)]
+        public void RecupererComptes_ShouldNotDuplicateOnSecondCall()
+        {
+            ClientSqliteDataService ds = new ClientSqliteDataService(CheminBd);
+            Client? client = ds.Get(1);
+            int nbComptesAttendu = 2;
+            Assert.Equal(nbComptesAttendu, client.Comptes.Count); 
+
+            ds.RecupererComptes(client); //
+
+            Assert.Equal(nbComptesAttendu, client.Comptes.Count);
+        }
+
+        [Fact]
+        [AvantApresDataService(CheminBd)]
+        public void Update_ShouldBeValid()
+        {
+            ClientSqliteDataService ds = new ClientSqliteDataService(CheminBd);
+            Client? clientAModifier = ds.Get(1);
+            string nouveauNom = "NouveauNom";
+            clientAModifier.Nom = nouveauNom;
+
+            bool updateReussi = ds.Update(clientAModifier); //
+            Assert.True(updateReussi);
+            Client? clientModifie = ds.Get(1);
+            Assert.Equal(nouveauNom, clientModifie.Nom);
         }
     }
 }
