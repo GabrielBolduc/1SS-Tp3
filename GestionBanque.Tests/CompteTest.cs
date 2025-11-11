@@ -9,47 +9,41 @@ namespace GestionBanque.Tests
         [Fact]
         public void Retirer_MontantValide_ShouldDecreaseBalance()
         {
-            double balanceInitiale = 100.0;
-            double montantRetrait = 20.0;
-            double balanceAttendue = 80.0;
-            Compte compte = new Compte(1, "12345", balanceInitiale, 1);
+            // Préparation (Arrange)
+            Compte compte = new Compte(1, "12345", 100.0, 1);
 
-            compte.Retirer(montantRetrait);
+            // Exécution (Act)
+            compte.Retirer(20.0);
 
-            Assert.Equal(balanceAttendue, compte.Balance);
+            // Affirmation (Assert)
+            Assert.Equal(80.0, compte.Balance);
         }
 
         [Fact]
         public void Deposer_MontantValide_ShouldIncreaseBalance()
         {
-            double balanceInitiale = 100.0;
-            double montantDepot = 50.0;
-            double balanceAttendue = 150.0;
-            Compte compte = new Compte(1, "12345", balanceInitiale, 1);
+            // Préparation (Arrange)
+            Compte compte = new Compte(1, "12345", 100.0, 1);
 
-            compte.Deposer(montantDepot); 
+            // Exécution (Act)
+            compte.Deposer(50.0); //
 
-            Assert.Equal(balanceAttendue, compte.Balance);
+            // Affirmation (Assert)
+            Assert.Equal(150.0, compte.Balance);
         }
 
         [Fact]
         public void Retirer_MontantInvalide_ShouldThrowException()
         {
-            double balanceInitiale = 100.0;
-            double montantRetrait = 200.0;
-            Compte compte = new Compte(1, "12345", balanceInitiale, 1);
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => compte.Retirer(montantRetrait));
+            Compte compte = new Compte(1, "12345", 100.0, 1);
+            Assert.Throws<ArgumentOutOfRangeException>(() => compte.Retirer(200.0));
         }
 
         [Fact]
         public void Deposer_MontantInvalide_ShouldThrowException()
         {
-            double balanceInitiale = 100.0;
-            double montantDepot = -50.0;
-            Compte compte = new Compte(1, "12345", balanceInitiale, 1);
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => compte.Deposer(montantDepot));
+            Compte compte = new Compte(1, "12345", 100.0, 1);
+            Assert.Throws<ArgumentOutOfRangeException>(() => compte.Deposer(-50.0));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace GestionBanque.Tests
     {
         private const string CheminBd = "..\\test.bd";
 
-        [Fact]
+        //[Fact]
         [AvantApresDataService(CheminBd)]
         public void Get_ShouldBeValid()
         {

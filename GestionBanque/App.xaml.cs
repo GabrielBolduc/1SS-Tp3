@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Autofac.Configuration;
-using GestionBanque.Views; // Ajout du using pour MainView
+using GestionBanque.Views;
 using Microsoft.Extensions.Configuration;
 using System.Windows;
 
@@ -15,7 +15,6 @@ namespace GestionBanque
             var configModule = new ConfigurationModule(configBuilder.Build());
 
             var containerBuilder = new ContainerBuilder();
-
             containerBuilder.RegisterModule(configModule);
 
             var container = containerBuilder.Build();
