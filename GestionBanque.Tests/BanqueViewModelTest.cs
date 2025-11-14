@@ -28,7 +28,7 @@ namespace GestionBanque.Tests
             _clientsFactices = new List<Client>
             {
                 new Client(1, "Gratton", "Bob", "bob@gratton.com"),
-                new Client(2, "Ouellet", "Mado", "mado@ouellet.com")
+                new Client(2, "Bolduc", "Gabriel", "gabriel@bolduc.com")
             };
             _clientsFactices[0].Comptes.Add(new Compte(10, "C1", 100, 1));
             _dsClientsMock.Setup(ds => ds.GetAll()).Returns(_clientsFactices); 
